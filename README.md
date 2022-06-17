@@ -13,9 +13,9 @@ The following is a comparison of the two income components in some current proje
 
 | Collections | Presale + Public sale | Royalty |
 | --- | --- | --- |
-| Bored Ape Yacht Club | 800ETH | 15220ETH |
-| Azuki | 8700ETH | 12435ETH |
-| Doodles | 1230ETH | 6700ETH |
+| Bored Ape Yacht Club | 800 ETH | 15220 ETH |
+| Azuki | 8700 ETH | 12435 ETH |
+| Doodles | 1230 ETH | 6700 ETH |
 
 
 This shows that there is a huge volume of transactions in top-streaming projects, which leads to a much larger royalty income than pre-sales/public sales. And again, we see a new possibility for higher income for early investors (OG or Early Minter): an equal share of royalty income for Minter, which would greatly encourage people to mint in top-streaming projects.
@@ -59,6 +59,8 @@ npm install erc721e
 
 ### UseCase
 ```js
+import "erc721e/contracts/ERC721E.sol";
+
 contract Coroodles is ERC721E {
   uint256 public publicSalePrice = 0.06 ether;
   constructor(
