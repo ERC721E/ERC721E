@@ -59,11 +59,6 @@ npm install erc721e
 
 ### UseCase
 ```js
-/**
- * @dev Implementation of [ERC721A](https://github.com/chiru-labs/ERC721A). Thanks to contributors!
- * Save on gas when you mint multiple NFTs at once. ERC721A is an improved implementation of the IERC721
- * standard that supports minting multiple tokens for close to the cost of one.
- */
 contract Coroodles is ERC721E {
   uint256 public publicSalePrice = 0.06 ether;
   constructor(
