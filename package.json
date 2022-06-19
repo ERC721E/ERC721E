@@ -32,6 +32,12 @@
     "type": "git",
     "url": "git+https://github.com/ERC721E/ERC721E.git"
   },
+  "keywords": [
+    "NFT",
+    "ERC721E",
+    "ERC721A",
+    "ERC721"
+  ],
   "author": "coroodles-dev",
   "license": "MIT",
   "bugs": {
