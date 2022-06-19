@@ -75,8 +75,9 @@ contract ERC721E is IERC721E, Ownable {
     // Divided royalties sender --> Divided royalties
     mapping(address => uint256) public hadWithdrawedAddress;
 
-    // Each address has mint amount
-    mapping(address => uint256) public mintMountOfAddress;
+    // Get donation or fund information
+    mapping(address => uint256) public addressToAmountFunded;
+
     uint256 public withdrawned = 0;
 
     // Mapping from token ID to ownership details
@@ -879,6 +880,24 @@ contract ERC721E is IERC721E, Ownable {
         }
     }
 
+    // Donate money and record the address of the sender of the message and the amount sent
+    function fund() public payable {
+        addressToAmountFunded[msg.sender] += msg.value;
+    }
+
+    function getThisBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
+    function getAllRoyaltyProfit() public view returns (uint256) {
+        return address(this).balance - totalSupply() * _price - withdrawned;
+    }
+
+    // Get the current maximum withdrawal of the project party
+    function canMaxWithdraw() public view returns (uint256) {
+        return _price * totalSupply() - withdrawned;
+    }
+
     // Withdraws ether from the contract
     function withdraw() public payable virtual onlyOwner {
         // Amount not withdrawn by the project party = current number of units sold * selling price - amount withdrawn by the project party
@@ -917,7 +936,7 @@ contract ERC721E is IERC721E, Ownable {
         // sender's share of royalties = royalty profit / total number of issues * number of sender's purchases - the sender's share of royalties
         uint256 giveSender = (royaltyProfit /
             (_currentIndex - _burnCounter - _startTokenId())) *
-            mintMountOfAddress[userAddress] -
+            balanceOf(userAddress) -
             hadWithdrawedAddress[userAddress];
 
         // If there is a situation where a late mint user comes in, and the total undrawn amount for all current users < the calculation of the equal share (royalties to be shared), it will need to be calculated after subsequent royalty increases
